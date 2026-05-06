@@ -29,11 +29,11 @@
   --gray-bg: #f7f7f4;
   --green-wa: #25D366;
   --white: #ffffff;
+  --red: #e74c3c;
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
   --shadow-md: 0 8px 20px rgba(0,0,0,0.05);
   --shadow-lg: 0 12px 28px rgba(0,0,0,0.08);
   --shadow-3d: 0 3px 0 rgba(0,0,0,0.05);
-  --shadow-press: 0 1px 0 rgba(0,0,0,0.05);
   --radius-sm: 12px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -80,7 +80,6 @@ body {
 .logo-section h1 span {
   color: var(--orange);
   font-size: 36px;
-  text-shadow: 0 1px 2px rgba(232,82,10,0.15);
 }
 
 .logo-section p {
@@ -112,7 +111,6 @@ body {
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   cursor: pointer;
-  transition: transform 0.2s;
 }
 
 .profile-photo:hover { transform: scale(1.02); }
@@ -122,7 +120,7 @@ body {
 .profile-details { flex: 1; }
 .profile-name { font-weight: 700; font-size: 15px; color: var(--gray-dark); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .profile-site { font-size: 12px; color: var(--gray-light); display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap; }
-.edit-icon { font-size: 11px; color: var(--gray-light); cursor: pointer; opacity: 0.6; transition: opacity 0.2s; }
+.edit-icon { font-size: 11px; color: var(--gray-light); cursor: pointer; opacity: 0.6; }
 .edit-icon:hover { opacity: 1; color: var(--orange); }
 
 /* TAB BAR */
@@ -151,6 +149,7 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  position: relative;
 }
 
 .tab-btn .tab-icon { font-size: 20px; }
@@ -184,7 +183,7 @@ body {
   box-shadow: 0 6px 14px rgba(232,82,10,0.25);
 }
 
-.date-day { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 1px; }
+.date-day { font-family: 'Bebas Neue', sans-serif; font-size: 24px; }
 .date-weekday { font-size: 12px; opacity: 0.9; margin-top: 3px; }
 .date-card input[type="date"] {
   background: rgba(255,255,255,0.2);
@@ -239,7 +238,7 @@ body {
 .time-field:hover { border-color: var(--orange); background: var(--white); }
 .time-field.has-value { border-left: 3px solid var(--orange); background: var(--white); }
 .time-field-label { font-size: 10px; font-weight: 700; color: var(--gray-light); letter-spacing: 0.6px; margin-bottom: 6px; }
-.time-field-value { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--gray-dark); letter-spacing: 1px; }
+.time-field-value { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--gray-dark); }
 .time-field-value.empty { color: var(--gray-light); opacity: 0.5; }
 
 .time-auto-btn {
@@ -255,11 +254,27 @@ body {
   color: var(--orange);
   cursor: pointer;
   transition: all 0.2s;
+  z-index: 5;
 }
 
 .time-auto-btn:hover { background: var(--orange); color: var(--white); }
 
-/* SUMMARY */
+/* VALIDAÇÃO */
+.field-missing {
+  border: 1px solid var(--red);
+  background: rgba(231, 76, 60, 0.05);
+}
+.field-missing .time-field-label { color: var(--red); }
+
+.required-badge {
+  font-size: 9px;
+  background: var(--orange);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 20px;
+  margin-left: 6px;
+}
+
 .summary-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -276,7 +291,6 @@ body {
 .sum-box .sum-val { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--orange); }
 .sum-box .sum-lbl { font-size: 9px; font-weight: 600; color: var(--gray-light); margin-top: 4px; text-transform: uppercase; }
 
-/* OBS */
 #obs-input {
   width: 100%;
   background: var(--gray-bg);
@@ -336,7 +350,7 @@ body {
 
 .btn-save-main:active { transform: scale(0.98); }
 
-/* MODAL SELETOR DE HORAS */
+/* MODAL SELETOR - COM ROLAGEM MANUAL */
 .modal-picker {
   position: fixed;
   inset: 0;
@@ -391,11 +405,12 @@ body {
 .picker-col-label { font-size: 11px; color: var(--gray-light); margin-bottom: 8px; text-transform: uppercase; }
 
 .picker-scroll {
-  height: 160px;
+  height: 180px;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   border-radius: var(--radius-md);
   background: var(--gray-bg);
+  -webkit-overflow-scrolling: touch;
 }
 
 .picker-scroll::-webkit-scrollbar { width: 3px; }
@@ -414,7 +429,7 @@ body {
   transition: all 0.1s;
 }
 
-.picker-item.selected { color: var(--orange); font-size: 28px; transform: scale(1.05); }
+.picker-item.selected { color: var(--orange); font-size: 28px; font-weight: bold; }
 
 .picker-actions {
   display: flex;
@@ -444,7 +459,7 @@ body {
   cursor: pointer;
 }
 
-/* ALARM BANNER */
+/* ALARM BANNER - VISÍVEL E FUNCIONAL */
 .alarm-banner {
   position: fixed;
   top: 0;
@@ -453,21 +468,105 @@ body {
   width: 100%;
   max-width: 500px;
   background: var(--orange);
-  padding: 14px 20px;
-  z-index: 200;
+  padding: 16px 20px;
+  z-index: 1000;
   transition: transform 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  border-radius: 0 0 20px 20px;
 }
 
 .alarm-banner.show { transform: translateX(-50%) translateY(0); }
 
-.alarm-banner-title { font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: white; margin-bottom: 4px; }
-.alarm-banner-sub { font-size: 12px; color: rgba(255,255,255,0.9); margin-bottom: 10px; }
-.alarm-banner-buttons { display: flex; gap: 10px; }
-.alarm-banner-buttons button { border: none; border-radius: 30px; padding: 8px 16px; font-weight: 700; font-size: 12px; cursor: pointer; }
+.alarm-banner-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: white; margin-bottom: 4px; }
+.alarm-banner-sub { font-size: 13px; color: rgba(255,255,255,0.9); margin-bottom: 12px; }
+.alarm-banner-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+.alarm-banner-buttons button { 
+  border: none; 
+  border-radius: 30px; 
+  padding: 10px 18px; 
+  font-weight: 700; 
+  font-size: 13px; 
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.alarm-banner-buttons button:active { transform: scale(0.96); }
 .btn-snooze { background: rgba(255,255,255,0.2); color: white; }
 .btn-register { background: white; color: var(--orange); }
 .btn-silence { background: rgba(0,0,0,0.2); color: white; }
+
+/* CARD DO ALARME NA ABA EXPORTAR */
+.alarm-card {
+  background: var(--gray-bg);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.alarm-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.alarm-info .alarm-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--gray-dark);
+}
+.alarm-info .alarm-sub { font-size: 11px; color: var(--gray-light); margin-top: 4px; }
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 28px;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 34px;
+  background: #ccc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 3px;
+  border-radius: 50%;
+  background: white;
+  transition: 0.2s;
+}
+.toggle-switch input:checked + .toggle-slider { background: var(--orange); }
+.toggle-switch input:checked + .toggle-slider::before { transform: translateX(24px); }
+
+.alarm-status {
+  font-size: 11px;
+  color: var(--gray-light);
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(232,82,10,0.08);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.alarm-status.active { color: var(--orange); background: rgba(232,82,10,0.12); }
+.alarm-status .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gray-light);
+  margin-right: 6px;
+}
+.alarm-status.active .dot { background: var(--orange); box-shadow: 0 0 6px var(--orange); }
 
 /* HISTORY */
 .hist-filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -492,7 +591,9 @@ body {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  transition: all 0.2s;
 }
+.export-btn:hover { background: var(--white); transform: translateX(4px); }
 
 /* TOAST */
 .toast {
@@ -502,48 +603,25 @@ body {
   transform: translateX(-50%) translateY(20px);
   background: var(--gray-dark);
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 40px;
   font-size: 13px;
+  font-weight: 500;
   opacity: 0;
   transition: all 0.3s;
   z-index: 1001;
   pointer-events: none;
+  text-align: center;
+  min-width: 200px;
+  max-width: 90%;
 }
 
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast-error { background: var(--red); }
 
+/* INLINE EDIT */
 .inline-edit-row { display: flex; gap: 8px; margin-top: 10px; }
 .inline-edit-row input { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid #ddd; }
-
-.alarm-toggle {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 26px;
-}
-.alarm-toggle input { opacity: 0; width: 0; height: 0; }
-.alarm-slider {
-  position: absolute;
-  inset: 0;
-  border-radius: 34px;
-  background: #ccc;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.alarm-slider::before {
-  content: '';
-  position: absolute;
-  height: 20px;
-  width: 20px;
-  left: 3px;
-  bottom: 3px;
-  border-radius: 50%;
-  background: white;
-  transition: 0.2s;
-}
-.alarm-toggle input:checked + .alarm-slider { background: var(--orange); }
-.alarm-toggle input:checked + .alarm-slider::before { transform: translateX(22px); }
 
 .hidden { display: none; }
 
@@ -606,10 +684,13 @@ body {
     </div>
 
     <div class="card">
-      <div class="card-title">🕐 HORÁRIOS</div>
+      <div class="card-title">
+        🕐 HORÁRIOS
+        <span class="required-badge">*Entrada e Saída obrigatórios</span>
+      </div>
       <div class="time-grid">
         <div class="time-field" onclick="openTimePicker('entry')" id="tf-entry">
-          <div class="time-field-label">ENTRADA</div>
+          <div class="time-field-label">ENTRADA <span style="color:#e74c3c">*</span></div>
           <div class="time-field-value empty" id="tv-entry">--:--</div>
           <button class="time-auto-btn" onclick="autoTime('entry',event)">Auto</button>
         </div>
@@ -624,7 +705,7 @@ body {
           <button class="time-auto-btn" onclick="autoTime('lunchin',event)">Auto</button>
         </div>
         <div class="time-field" onclick="openTimePicker('exit')" id="tf-exit">
-          <div class="time-field-label">SAÍDA FINAL</div>
+          <div class="time-field-label">SAÍDA FINAL <span style="color:#e74c3c">*</span></div>
           <div class="time-field-value empty" id="tv-exit">--:--</div>
           <button class="time-auto-btn" onclick="autoTime('exit',event)">Auto</button>
         </div>
@@ -638,7 +719,7 @@ body {
 
     <div class="card">
       <div class="card-title">📝 OBSERVAÇÃO</div>
-      <textarea id="obs-input" placeholder="Notas especiais..." rows="2"></textarea>
+      <textarea id="obs-input" placeholder="Notas especiais (opcional)..." rows="2"></textarea>
       <div class="btn-row">
         <button class="btn-wa" onclick="sendWA()">📱 WhatsApp</button>
         <button class="btn-save-main" onclick="saveRecord()">💾 GUARDAR</button>
@@ -660,16 +741,27 @@ body {
   </div>
 
   <div class="page" id="page-exp">
+    <!-- CARD DO DESPERTADOR VISÍVEL -->
     <div class="card">
-      <div class="card-title">⏰ DESPERTADOR</div>
-      <div style="display:flex; justify-content:space-between; align-items:center">
-        <span>Aviso às 18h (Seg–Sex) - Desativa ao registrar saída</span>
-        <label class="alarm-toggle">
-          <input type="checkbox" id="alarm-toggle" onchange="toggleAlarm()">
-          <span class="alarm-slider"></span>
-        </label>
+      <div class="card-title">⏰ DESPERTADOR AUTOMÁTICO</div>
+      <div class="alarm-card">
+        <div class="alarm-row">
+          <div class="alarm-info">
+            <div class="alarm-title">⏰ Alarme 18h (Segunda a Sexta)</div>
+            <div class="alarm-sub">Desativa automaticamente quando saída for registrada</div>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" id="alarm-global-toggle" onchange="toggleAlarmGlobal()">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <div class="alarm-status" id="alarm-status-text">
+          <span class="dot"></span>
+          Carregando...
+        </div>
       </div>
     </div>
+
     <div class="card">
       <div class="card-title">📊 EXPORTAR</div>
       <button class="export-btn" onclick="exportCSV()">📄 CSV <span style="color:var(--orange)">Exportar →</span></button>
@@ -695,15 +787,11 @@ body {
     <div class="picker-selectors">
       <div class="picker-col">
         <div class="picker-col-label">HORAS</div>
-        <div class="picker-scroll" id="pickerHoursList">
-          <!-- gerado via js -->
-        </div>
+        <div class="picker-scroll" id="pickerHoursList"></div>
       </div>
       <div class="picker-col">
         <div class="picker-col-label">MINUTOS</div>
-        <div class="picker-scroll" id="pickerMinutesList">
-          <!-- gerado via js -->
-        </div>
+        <div class="picker-scroll" id="pickerMinutesList"></div>
       </div>
     </div>
     <div class="picker-actions">
@@ -713,9 +801,9 @@ body {
   </div>
 </div>
 
-<!-- ALARM BANNER -->
+<!-- ALARM BANNER FLUTUANTE -->
 <div id="alarmBanner" class="alarm-banner">
-  <div class="alarm-banner-title">⏰ Não se esqueça do horário!</div>
+  <div class="alarm-banner-title">⏰ Atenção!</div>
   <div class="alarm-banner-sub">Ainda não registou a saída de hoje.</div>
   <div class="alarm-banner-buttons">
     <button class="btn-snooze" onclick="snoozeAlarm()">+30 min</button>
@@ -726,7 +814,7 @@ body {
 
 <script>
 // ============================================================
-// CONSTANTES E CONFIGURAÇÕES
+// CONSTANTES
 // ============================================================
 const KEY_RECORDS = 'pi_records_v2';
 const KEY_PROFILE = 'pi_profile_v2';
@@ -736,7 +824,7 @@ const COMPANY_WA = '351939910536';
 
 let records = JSON.parse(localStorage.getItem(KEY_RECORDS) || '[]');
 let profile = JSON.parse(localStorage.getItem(KEY_PROFILE) || '{}');
-let alarmCfg = JSON.parse(localStorage.getItem(KEY_ALARM) || '{"active":true, "snoozeUntil":null, "disabledToday":null}');
+let alarmCfg = JSON.parse(localStorage.getItem(KEY_ALARM) || '{"active":true, "snoozeUntil":null, "disabledToday":null, "triggeredToday":null}');
 
 let times = {entry:'', lunchout:'', lunchin:'', exit:''};
 let currentDate = todayISO();
@@ -750,13 +838,37 @@ let alarmInterval = null;
 function todayISO() { return new Date().toISOString().slice(0,10); }
 function saveRecords() { localStorage.setItem(KEY_RECORDS, JSON.stringify(records)); }
 function saveProfile() { localStorage.setItem(KEY_PROFILE, JSON.stringify(profile)); applyProfile(); }
-function saveAlarm() { localStorage.setItem(KEY_ALARM, JSON.stringify(alarmCfg)); }
+function saveAlarm() { localStorage.setItem(KEY_ALARM, JSON.stringify(alarmCfg)); updateAlarmStatusDisplay(); }
 function vibrate() { if(navigator.vibrate) navigator.vibrate(30); }
-function showToast(msg) { 
+
+function showToast(msg, isError = false) {
   const t = document.getElementById('toast');
   t.textContent = msg;
+  t.classList.remove('toast-error');
+  if(isError) t.classList.add('toast-error');
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ============================================================
+// VALIDAÇÃO
+// ============================================================
+function validateRequiredFields() {
+  const hasEntry = times.entry !== '';
+  const hasExit = times.exit !== '';
+  
+  const entryField = document.getElementById('tf-entry');
+  const exitField = document.getElementById('tf-exit');
+  
+  if(!hasEntry) entryField.classList.add('field-missing');
+  else entryField.classList.remove('field-missing');
+  
+  if(!hasExit) exitField.classList.add('field-missing');
+  else exitField.classList.remove('field-missing');
+  
+  if(!hasEntry) { showToast('⚠️ A hora de ENTRADA é obrigatória!', true); return false; }
+  if(!hasExit) { showToast('⚠️ A hora de SAÍDA FINAL é obrigatória!', true); return false; }
+  return true;
 }
 
 // ============================================================
@@ -767,9 +879,10 @@ window.addEventListener('DOMContentLoaded', () => {
   applyProfile();
   loadDayData(currentDate);
   renderHistory();
-  document.getElementById('alarm-toggle').checked = alarmCfg.active !== false;
+  document.getElementById('alarm-global-toggle').checked = alarmCfg.active !== false;
   initAlarmSystem();
   buildPickerOptions();
+  updateAlarmStatusDisplay();
 });
 
 function setDate(iso) {
@@ -789,10 +902,7 @@ function loadDayData(iso) {
   times = rec ? {entry:rec.entry||'', lunchout:rec.lunchout||'', lunchin:rec.lunchin||'', exit:rec.exit||''} : {entry:'', lunchout:'', lunchin:'', exit:''};
   document.getElementById('obs-input').value = rec?.obs || '';
   renderTimes();
-  // Se carregou um dia com saída, verificar para desabilitar alarme
-  if(iso === todayISO() && times.exit) {
-    disableAlarmForToday();
-  }
+  if(iso === todayISO() && times.exit) disableAlarmForToday();
 }
 
 function applyProfile() {
@@ -841,13 +951,14 @@ function saveEditSite() {
 function openProfileModal() { showToast('👷 Edite nome e local usando os ✏️'); }
 
 // ============================================================
-// SELETOR DE HORAS MODAL (Touch-friendly)
+// SELETOR DE HORAS COM ROLAGEM MANUAL (minutos de 5 em 5)
 // ============================================================
 function buildPickerOptions() {
   const hoursList = document.getElementById('pickerHoursList');
   const minutesList = document.getElementById('pickerMinutesList');
   hoursList.innerHTML = '';
   minutesList.innerHTML = '';
+  
   for(let h = 0; h < 24; h++) {
     const div = document.createElement('div');
     div.className = 'picker-item';
@@ -855,6 +966,8 @@ function buildPickerOptions() {
     div.onclick = () => selectPickerHour(h);
     hoursList.appendChild(div);
   }
+  
+  // Minutos de 5 em 5: 00,05,10,15,20,25,30,35,40,45,50,55
   for(let m = 0; m < 60; m += 5) {
     const div = document.createElement('div');
     div.className = 'picker-item';
@@ -864,14 +977,8 @@ function buildPickerOptions() {
   }
 }
 
-function selectPickerHour(h) {
-  pickerHour = h;
-  updatePickerSelection();
-}
-function selectPickerMinute(m) {
-  pickerMinute = m;
-  updatePickerSelection();
-}
+function selectPickerHour(h) { pickerHour = h; updatePickerSelection(); }
+function selectPickerMinute(m) { pickerMinute = m; updatePickerSelection(); }
 
 function updatePickerSelection() {
   const hoursItems = document.querySelectorAll('#pickerHoursList .picker-item');
@@ -879,15 +986,24 @@ function updatePickerSelection() {
   hoursItems.forEach((item, idx) => {
     if(idx === pickerHour) item.classList.add('selected');
     else item.classList.remove('selected');
-    // scroll into view
-    if(idx === pickerHour) item.scrollIntoView({ block: 'center', behavior: 'smooth' });
   });
   const minIdx = pickerMinute / 5;
   minutesItems.forEach((item, idx) => {
     if(idx === minIdx) item.classList.add('selected');
     else item.classList.remove('selected');
-    if(idx === minIdx) item.scrollIntoView({ block: 'center', behavior: 'smooth' });
   });
+}
+
+function scrollToSelected() {
+  const hoursContainer = document.getElementById('pickerHoursList');
+  const minutesContainer = document.getElementById('pickerMinutesList');
+  if(hoursContainer.children[pickerHour]) {
+    hoursContainer.children[pickerHour].scrollIntoView({ block: 'center', behavior: 'auto' });
+  }
+  const minIdx = pickerMinute / 5;
+  if(minutesContainer.children[minIdx]) {
+    minutesContainer.children[minIdx].scrollIntoView({ block: 'center', behavior: 'auto' });
+  }
 }
 
 function openTimePicker(field) {
@@ -908,11 +1024,10 @@ function openTimePicker(field) {
   document.getElementById('pickerTitle').textContent = labels[field];
   updatePickerSelection();
   document.getElementById('timePickerModal').classList.add('open');
+  setTimeout(() => scrollToSelected(), 100);
 }
 
-function closeTimePicker() {
-  document.getElementById('timePickerModal').classList.remove('open');
-}
+function closeTimePicker() { document.getElementById('timePickerModal').classList.remove('open'); }
 
 function setCurrentTime() {
   const now = new Date();
@@ -920,6 +1035,7 @@ function setCurrentTime() {
   pickerMinute = Math.round(now.getMinutes()/5)*5;
   if(pickerMinute === 60) { pickerMinute = 0; pickerHour = (pickerHour+1)%24; }
   updatePickerSelection();
+  scrollToSelected();
   showToast('⚡ Hora atual selecionada');
 }
 
@@ -929,7 +1045,6 @@ function confirmTimePicker() {
     renderTimes();
     closeTimePicker();
     vibrate();
-    // Se for saída e for hoje, desabilitar alarme
     if(currentPickerField === 'exit' && currentDate === todayISO() && times.exit) {
       disableAlarmForToday();
       showToast('✅ Saída registrada - Despertador desativado hoje');
@@ -938,7 +1053,7 @@ function confirmTimePicker() {
 }
 
 // ============================================================
-// HORÁRIOS E CÁLCULOS
+// HORÁRIOS
 // ============================================================
 function autoTime(key, ev) {
   ev && ev.stopPropagation();
@@ -950,9 +1065,7 @@ function autoTime(key, ev) {
   vibrate();
   const labels = {entry:'Entrada', lunchout:'Saída almoço', lunchin:'Retorno', exit:'Saída'};
   showToast(`⚡ ${labels[key]} → ${times[key]}`);
-  if(key === 'exit' && currentDate === todayISO() && times.exit) {
-    disableAlarmForToday();
-  }
+  if(key === 'exit' && currentDate === todayISO() && times.exit) disableAlarmForToday();
 }
 
 function renderTimes() {
@@ -964,6 +1077,7 @@ function renderTimes() {
       el.textContent = times[k];
       el.classList.remove('empty');
       tf.classList.add('has-value');
+      tf.classList.remove('field-missing');
     } else {
       el.textContent = '--:--';
       el.classList.add('empty');
@@ -971,6 +1085,7 @@ function renderTimes() {
     }
   });
   calcSummary();
+  validateRequiredFields();
 }
 
 function calcSummary() {
@@ -986,30 +1101,23 @@ function calcSummary() {
 }
 
 // ============================================================
-// SALVAR REGISTO
+// SALVAR
 // ============================================================
 function saveRecord() {
+  if(!validateRequiredFields()) return;
   vibrate();
   const obs = document.getElementById('obs-input').value.trim();
   const idx = records.findIndex(r => r.date === currentDate);
   const rec = {
-    date: currentDate,
-    name: profile.name || '—',
-    site: profile.site || '—',
-    entry: times.entry,
-    lunchout: times.lunchout,
-    lunchin: times.lunchin,
-    exit: times.exit,
-    obs
+    date: currentDate, name: profile.name || '—', site: profile.site || '—',
+    entry: times.entry, lunchout: times.lunchout, lunchin: times.lunchin, exit: times.exit, obs
   };
   if(idx >= 0) records[idx] = rec;
   else records.unshift(rec);
   saveRecords();
   renderHistory();
   showToast('✅ Registado com sucesso!');
-  if(times.exit && currentDate === todayISO()) {
-    disableAlarmForToday();
-  }
+  if(times.exit && currentDate === todayISO()) disableAlarmForToday();
 }
 
 // ============================================================
@@ -1046,117 +1154,99 @@ function deleteRecord(date) { records = records.filter(r => r.date !== date); sa
 function exportCSV() { if(!records.length) { showToast('⚠️ Sem dados'); return; } const header = 'Data,Nome,Local,Entrada,Saída,Observação\n'; const rows = records.map(r => `${r.date},"${r.name}","${r.site}",${r.entry||''},${r.exit||''},"${r.obs||''}"`).join('\n'); const blob = new Blob([header+rows], {type:'text/csv'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'registos-horas.csv'; a.click(); showToast('📄 CSV exportado'); }
 function copyReport() { if(!records.length) { showToast('⚠️ Sem dados'); return; } const text = records.slice(0,20).map(r => `${formatDatePT(r.date)}: ${r.entry||'?'}→${r.exit||'?'} (${calcWorked(r)})${r.obs?' - '+r.obs:''}`).join('\n'); navigator.clipboard.writeText(text); vibrate(); showToast('📋 Relatório copiado'); }
 function exportWA() { if(!records.length) { showToast('⚠️ Sem dados'); return; } const text = encodeURIComponent(`📋 REGISTO DE HORAS - PROPÓSITOS INTERLIGADOS\n👷 ${profile.name||''}\n📍 ${profile.site||''}\n${'─'.repeat(30)}\n${records.slice(0,10).map(r => `📅 ${formatDatePT(r.date)}: ${r.entry||'?'} → ${r.exit||'?'} (${calcWorked(r)})`).join('\n')}`); window.open(`https://wa.me/${COMPANY_WA}?text=${text}`, '_blank'); vibrate(); }
-function sendWA() { vibrate(); const obs = document.getElementById('obs-input').value.trim(); let worked = '--:--'; if(times.entry && times.exit) { const e = times.entry.split(':').map(Number); const x = times.exit.split(':').map(Number); const total = (x[0]*60+x[1]) - (e[0]*60+e[1]); worked = `${String(Math.floor(total/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`; } const text = encodeURIComponent(`📋 PROPÓSITOS INTERLIGADOS\n👷 ${profile.name||'—'} | 📍 ${profile.site||'—'}\n📅 ${formatDatePT(currentDate)}\n🟢 Entrada: ${times.entry||'?'}\n🔴 Saída: ${times.exit||'?'}\n⏱ Total: ${worked}${obs?'\n💬 '+obs:''}`); window.open(`https://wa.me/${COMPANY_WA}?text=${text}`, '_blank'); }
+function sendWA() { 
+  if(!validateRequiredFields()) return;
+  vibrate(); 
+  const obs = document.getElementById('obs-input').value.trim(); 
+  let worked = '--:--'; 
+  if(times.entry && times.exit) { 
+    const e = times.entry.split(':').map(Number); 
+    const x = times.exit.split(':').map(Number); 
+    const total = (x[0]*60+x[1]) - (e[0]*60+e[1]); 
+    worked = `${String(Math.floor(total/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`; 
+  } 
+  const text = encodeURIComponent(`📋 PROPÓSITOS INTERLIGADOS\n👷 ${profile.name||'—'} | 📍 ${profile.site||'—'}\n📅 ${formatDatePT(currentDate)}\n🟢 Entrada: ${times.entry||'?'}\n🔴 Saída: ${times.exit||'?'}\n⏱ Total: ${worked}${obs?'\n💬 '+obs:''}`); 
+  window.open(`https://wa.me/${COMPANY_WA}?text=${text}`, '_blank'); 
+}
 
 // ============================================================
-// SISTEMA DE ALARME (18h - Segunda a Sexta)
+// ALARME AUTOMÁTICO 18h
 // ============================================================
 function initAlarmSystem() {
   if(alarmInterval) clearInterval(alarmInterval);
-  alarmInterval = setInterval(checkAlarm, 30000); // verifica a cada 30s
+  alarmInterval = setInterval(checkAlarm, 30000);
   checkAlarm();
+  updateAlarmStatusDisplay();
 }
 
 function checkAlarm() {
   if(!alarmCfg.active) return;
-  
   const today = todayISO();
   const now = new Date();
-  const day = now.getDay(); // 0=Dom, 6=Sab
+  const day = now.getDay();
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
   
-  // Fim de semana: não dispara
   if(day === 0 || day === 6) return;
-  
-  // Se já foi desabilitado hoje (por ter registrado saída)
   if(alarmCfg.disabledToday === today) return;
   
-  // Se foi silenciado manualmente hoje
   const silence = localStorage.getItem(KEY_SILENCE);
   if(silence === today) return;
   
-  // Verificar se saída já foi registrada hoje
   const todayRecord = records.find(r => r.date === today);
-  if(todayRecord && todayRecord.exit) {
-    disableAlarmForToday();
-    return;
-  }
+  if(todayRecord && todayRecord.exit) { disableAlarmForToday(); return; }
   
-  // Verificar snooze
   if(alarmCfg.snoozeUntil && currentMinutes < alarmCfg.snoozeUntil) return;
   if(alarmCfg.snoozeUntil && currentMinutes >= alarmCfg.snoozeUntil) {
     alarmCfg.snoozeUntil = null;
     saveAlarm();
   }
   
-  // Alarme às 18:00 (1080 minutos)
   const ALARM_TIME = 18 * 60;
   if(currentMinutes >= ALARM_TIME && !alarmCfg.triggeredToday) {
-    triggerAlarm();
+    triggerAlarm(today);
   }
   
-  // Reset diário do triggered
   if(alarmCfg.triggeredToday && alarmCfg.triggeredToday !== today) {
-    alarmCfg.triggeredToday = false;
-    alarmCfg.snoozeUntil = null;
+    alarmCfg.triggeredToday = null;
     saveAlarm();
   }
 }
 
-function triggerAlarm() {
-  const today = todayISO();
+function triggerAlarm(today) {
   alarmCfg.triggeredToday = today;
   saveAlarm();
   showAlarmBanner();
-  // Notificação se permitido
   if('Notification' in window && Notification.permission === 'granted') {
     new Notification('⏰ Propósitos Interligados', { body: 'Não se esqueça de registar a saída!' });
   }
 }
 
-function showAlarmBanner() {
-  document.getElementById('alarmBanner').classList.add('show');
-}
-
-function hideAlarmBanner() {
-  document.getElementById('alarmBanner').classList.remove('show');
-}
-
+function showAlarmBanner() { document.getElementById('alarmBanner').classList.add('show'); }
+function hideAlarmBanner() { document.getElementById('alarmBanner').classList.remove('show'); }
 function snoozeAlarm() {
   const now = new Date();
-  const currentMin = now.getHours() * 60 + now.getMinutes();
-  alarmCfg.snoozeUntil = currentMin + 30;
-  alarmCfg.triggeredToday = false;
+  alarmCfg.snoozeUntil = (now.getHours() * 60 + now.getMinutes()) + 30;
+  alarmCfg.triggeredToday = null;
   saveAlarm();
   hideAlarmBanner();
   showToast('😴 Adiado por 30 minutos');
+  updateAlarmStatusDisplay();
 }
-
-function goToRegister() {
-  hideAlarmBanner();
-  showTab('reg');
-}
-
-function silenceToday() {
-  localStorage.setItem(KEY_SILENCE, todayISO());
-  hideAlarmBanner();
-  showToast('🔕 Silenciado apenas hoje');
-}
-
+function goToRegister() { hideAlarmBanner(); showTab('reg'); }
+function silenceToday() { localStorage.setItem(KEY_SILENCE, todayISO()); hideAlarmBanner(); showToast('🔕 Silenciado apenas hoje'); updateAlarmStatusDisplay(); }
 function disableAlarmForToday() {
-  const today = todayISO();
-  alarmCfg.disabledToday = today;
-  alarmCfg.triggeredToday = false;
+  alarmCfg.disabledToday = todayISO();
+  alarmCfg.triggeredToday = null;
   alarmCfg.snoozeUntil = null;
   saveAlarm();
   hideAlarmBanner();
 }
 
-function toggleAlarm() {
-  alarmCfg.active = document.getElementById('alarm-toggle').checked;
+function toggleAlarmGlobal() {
+  alarmCfg.active = document.getElementById('alarm-global-toggle').checked;
   if(alarmCfg.active) {
     alarmCfg.disabledToday = null;
-    alarmCfg.triggeredToday = false;
+    alarmCfg.triggeredToday = null;
     alarmCfg.snoozeUntil = null;
     showToast('⏰ Despertador ativado (Seg-Sex, 18h)');
   } else {
@@ -1165,6 +1255,34 @@ function toggleAlarm() {
   }
   saveAlarm();
   vibrate();
+  updateAlarmStatusDisplay();
+}
+
+function updateAlarmStatusDisplay() {
+  const statusEl = document.getElementById('alarm-status-text');
+  if(!statusEl) return;
+  const today = todayISO();
+  const silence = localStorage.getItem(KEY_SILENCE);
+  const todayRecord = records.find(r => r.date === today);
+  
+  if(!alarmCfg.active) {
+    statusEl.innerHTML = '<span class="dot"></span> 🔕 Despertador desligado';
+    statusEl.classList.remove('active');
+  } else if(alarmCfg.disabledToday === today || (todayRecord && todayRecord.exit)) {
+    statusEl.innerHTML = '<span class="dot"></span> ✅ Saída registrada hoje - Despertador inativo';
+    statusEl.classList.remove('active');
+  } else if(silence === today) {
+    statusEl.innerHTML = '<span class="dot"></span> 🔕 Silenciado apenas hoje';
+    statusEl.classList.remove('active');
+  } else if(alarmCfg.snoozeUntil) {
+    const h = Math.floor(alarmCfg.snoozeUntil/60);
+    const m = alarmCfg.snoozeUntil%60;
+    statusEl.innerHTML = `<span class="dot"></span> ⏰ Próximo alarme: ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    statusEl.classList.add('active');
+  } else {
+    statusEl.innerHTML = '<span class="dot"></span> ⏰ Alarme ativo - Dispara às 18h (Seg-Sex)';
+    statusEl.classList.add('active');
+  }
 }
 
 // ============================================================
@@ -1189,9 +1307,10 @@ function confirmClear() {
   }
 }
 
-// ============================================================
-// FIM
-// ============================================================
+// Pedir permissão de notificação
+if('Notification' in window && Notification.permission === 'default') {
+  Notification.requestPermission();
+}
 </script>
 </div>
 </body>
