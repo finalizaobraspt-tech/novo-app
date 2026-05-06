@@ -57,7 +57,6 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
-/* HEADER */
 .app-header {
   background: var(--white);
   padding: 20px 20px 12px;
@@ -123,7 +122,6 @@ body {
 .edit-icon { font-size: 11px; color: var(--gray-light); cursor: pointer; opacity: 0.6; }
 .edit-icon:hover { opacity: 1; color: var(--orange); }
 
-/* TAB BAR */
 .tab-bar {
   display: flex;
   background: var(--white);
@@ -165,12 +163,10 @@ body {
   border-radius: 2px;
 }
 
-/* PAGES */
 .pages { flex: 1; background: var(--white); }
 .page { display: none; padding: 20px; }
 .page.active { display: block; }
 
-/* DATE CARD */
 .date-card {
   background: linear-gradient(135deg, var(--orange) 0%, var(--orange-dark) 100%);
   border-radius: var(--radius-xl);
@@ -195,7 +191,6 @@ body {
   font-size: 12px;
 }
 
-/* CARDS */
 .card {
   background: var(--white);
   border-radius: var(--radius-lg);
@@ -217,7 +212,6 @@ body {
   gap: 8px;
 }
 
-/* TIME GRID */
 .time-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -259,7 +253,6 @@ body {
 
 .time-auto-btn:hover { background: var(--orange); color: var(--white); }
 
-/* VALIDAÇÃO */
 .field-missing {
   border: 1px solid var(--red);
   background: rgba(231, 76, 60, 0.05);
@@ -305,7 +298,6 @@ body {
 
 #obs-input:focus { border-color: var(--orange); background: var(--white); }
 
-/* BUTTONS */
 .btn-row {
   display: flex;
   gap: 12px;
@@ -350,7 +342,6 @@ body {
 
 .btn-save-main:active { transform: scale(0.98); }
 
-/* MODAL SELETOR - COM ROLAGEM MANUAL */
 .modal-picker {
   position: fixed;
   inset: 0;
@@ -459,7 +450,6 @@ body {
   cursor: pointer;
 }
 
-/* ALARM BANNER - VISÍVEL E FUNCIONAL */
 .alarm-banner {
   position: fixed;
   top: 0;
@@ -494,7 +484,6 @@ body {
 .btn-register { background: white; color: var(--orange); }
 .btn-silence { background: rgba(0,0,0,0.2); color: white; }
 
-/* CARD DO ALARME NA ABA EXPORTAR */
 .alarm-card {
   background: var(--gray-bg);
   border-radius: var(--radius-md);
@@ -568,7 +557,6 @@ body {
 }
 .alarm-status.active .dot { background: var(--orange); box-shadow: 0 0 6px var(--orange); }
 
-/* HISTORY */
 .hist-filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 .hist-filters input { flex: 1; background: var(--gray-bg); border: none; border-radius: var(--radius-sm); padding: 12px; }
 .hist-filters button { background: var(--orange); color: white; border: none; border-radius: var(--radius-sm); padding: 12px 18px; font-weight: 700; cursor: pointer; }
@@ -579,7 +567,6 @@ body {
 .hist-obs { font-size: 11px; color: var(--orange); margin-top: 8px; padding: 6px 10px; background: rgba(232,82,10,0.08); border-radius: 10px; }
 .hist-del { position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 14px; cursor: pointer; opacity: 0.4; }
 
-/* EXPORT */
 .export-btn {
   width: 100%;
   padding: 14px;
@@ -595,7 +582,6 @@ body {
 }
 .export-btn:hover { background: var(--white); transform: translateX(4px); }
 
-/* TOAST */
 .toast {
   position: fixed;
   bottom: 30px;
@@ -619,7 +605,6 @@ body {
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast-error { background: var(--red); }
 
-/* INLINE EDIT */
 .inline-edit-row { display: flex; gap: 8px; margin-top: 10px; }
 .inline-edit-row input { flex: 1; padding: 10px; border-radius: 10px; border: 1px solid #ddd; }
 
@@ -741,7 +726,6 @@ body {
   </div>
 
   <div class="page" id="page-exp">
-    <!-- CARD DO DESPERTADOR VISÍVEL -->
     <div class="card">
       <div class="card-title">⏰ DESPERTADOR AUTOMÁTICO</div>
       <div class="alarm-card">
@@ -777,7 +761,6 @@ body {
 
 <div id="toast" class="toast"></div>
 
-<!-- MODAL SELETOR DE HORAS -->
 <div id="timePickerModal" class="modal-picker">
   <div class="picker-container">
     <div class="picker-header">
@@ -801,7 +784,6 @@ body {
   </div>
 </div>
 
-<!-- ALARM BANNER FLUTUANTE -->
 <div id="alarmBanner" class="alarm-banner">
   <div class="alarm-banner-title">⏰ Atenção!</div>
   <div class="alarm-banner-sub">Ainda não registou a saída de hoje.</div>
@@ -951,7 +933,7 @@ function saveEditSite() {
 function openProfileModal() { showToast('👷 Edite nome e local usando os ✏️'); }
 
 // ============================================================
-// SELETOR DE HORAS COM ROLAGEM MANUAL (minutos de 5 em 5)
+// SELETOR DE HORAS
 // ============================================================
 function buildPickerOptions() {
   const hoursList = document.getElementById('pickerHoursList');
@@ -967,7 +949,6 @@ function buildPickerOptions() {
     hoursList.appendChild(div);
   }
   
-  // Minutos de 5 em 5: 00,05,10,15,20,25,30,35,40,45,50,55
   for(let m = 0; m < 60; m += 5) {
     const div = document.createElement('div');
     div.className = 'picker-item';
@@ -1093,7 +1074,7 @@ function calcSummary() {
   const e = parse(times.entry), lo = parse(times.lunchout), li = parse(times.lunchin), x = parse(times.exit);
   const fmt = min => { if(min === null || min < 0) return '--:--'; return `${String(Math.floor(min/60)).padStart(2,'0')}:${String(min%60).padStart(2,'0')}`; };
   const totalSpan = (e !== null && x !== null) ? x - e : null;
-  const lunch = (lo !== null && li !== null) ? li - lo : null;
+  const lunch = (lo !== null && li !== null && li > lo) ? li - lo : null;
   const worked = (totalSpan !== null && lunch !== null) ? totalSpan - lunch : totalSpan;
   document.getElementById('sum-work').textContent = fmt(totalSpan);
   document.getElementById('sum-lunch').textContent = fmt(lunch);
@@ -1121,7 +1102,38 @@ function saveRecord() {
 }
 
 // ============================================================
-// HISTÓRICO
+// FUNÇÃO CORRIGIDA: calcWorked (com desconto do almoço)
+// ============================================================
+function calcWorked(r) { 
+  const parse = t => { 
+    if(!t) return null; 
+    const [h,m] = t.split(':').map(Number); 
+    return h*60 + m; 
+  }; 
+  
+  const e = parse(r.entry); 
+  const x = parse(r.exit);
+  const lo = parse(r.lunchout);
+  const li = parse(r.lunchin);
+  
+  if(e === null || x === null) return '--:--';
+  
+  let total = x - e;
+  
+  if(lo !== null && li !== null && li > lo) {
+    const lunchTime = li - lo;
+    total = total - lunchTime;
+  }
+  
+  if(total < 0) return '--:--';
+  
+  const hours = Math.floor(total / 60);
+  const minutes = total % 60;
+  return `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}`;
+}
+
+// ============================================================
+// FUNÇÃO CORRIGIDA: renderHistory
 // ============================================================
 function renderHistory() {
   const from = document.getElementById('filter-from').value;
@@ -1132,45 +1144,142 @@ function renderHistory() {
   if(to) list = list.filter(r => r.date <= to);
   if(prof) list = list.filter(r => (r.name || '').toLowerCase().includes(prof));
   const el = document.getElementById('hist-list');
-  if(!list.length) { el.innerHTML = '<div style="text-align:center;padding:50px;color:#999">📋 Nenhum registo encontrado</div>'; return; }
-  el.innerHTML = list.map(r => `
-    <div class="hist-entry">
-      <button class="hist-del" onclick="deleteRecord('${r.date}')">🗑</button>
-      <div class="hist-date">${formatDatePT(r.date)}</div>
-      <div class="hist-times">${r.entry || '?'} → ${r.exit || '?'}</div>
-      <div class="hist-hours">${calcWorked(r)}</div>
-      ${r.obs ? `<div class="hist-obs">💬 ${r.obs}</div>` : ''}
-    </div>
-  `).join('');
+  if(!list.length) { 
+    el.innerHTML = '<div style="text-align:center;padding:50px;color:#999">📋 Nenhum registo encontrado</div>'; 
+    return; 
+  }
+  el.innerHTML = list.map(r => {
+    const horasTrabalhadas = calcWorked(r);
+    const entradaSaida = `${r.entry || '?'} → ${r.exit || '?'}`;
+    const almocoInfo = (r.lunchout && r.lunchin) ? ` (Almoço: ${r.lunchout}→${r.lunchin})` : '';
+    
+    return `
+      <div class="hist-entry">
+        <button class="hist-del" onclick="deleteRecord('${r.date}')">🗑</button>
+        <div class="hist-date">${formatDatePT(r.date)}</div>
+        <div class="hist-times">${entradaSaida}${almocoInfo}</div>
+        <div class="hist-hours">${horasTrabalhadas}</div>
+        ${r.obs ? `<div class="hist-obs">💬 ${r.obs}</div>` : ''}
+      </div>
+    `;
+  }).join('');
 }
 
 function formatDatePT(iso) { const d = new Date(iso+'T12:00:00'); return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`; }
-function calcWorked(r) { const parse = t => { if(!t) return null; const [h,m] = t.split(':').map(Number); return h*60+m; }; const e = parse(r.entry), x = parse(r.exit); if(e === null || x === null) return '--:--'; const total = x - e; return `${String(Math.floor(total/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`; }
+
 function deleteRecord(date) { records = records.filter(r => r.date !== date); saveRecords(); renderHistory(); vibrate(); showToast('🗑️ Registo eliminado'); }
 
 // ============================================================
-// EXPORT
+// FUNÇÃO CORRIGIDA: exportCSV
 // ============================================================
-function exportCSV() { if(!records.length) { showToast('⚠️ Sem dados'); return; } const header = 'Data,Nome,Local,Entrada,Saída,Observação\n'; const rows = records.map(r => `${r.date},"${r.name}","${r.site}",${r.entry||''},${r.exit||''},"${r.obs||''}"`).join('\n'); const blob = new Blob([header+rows], {type:'text/csv'}); const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'registos-horas.csv'; a.click(); showToast('📄 CSV exportado'); }
-function copyReport() { if(!records.length) { showToast('⚠️ Sem dados'); return; } const text = records.slice(0,20).map(r => `${formatDatePT(r.date)}: ${r.entry||'?'}→${r.exit||'?'} (${calcWorked(r)})${r.obs?' - '+r.obs:''}`).join('\n'); navigator.clipboard.writeText(text); vibrate(); showToast('📋 Relatório copiado'); }
-function exportWA() { if(!records.length) { showToast('⚠️ Sem dados'); return; } const text = encodeURIComponent(`📋 REGISTO DE HORAS - PROPÓSITOS INTERLIGADOS\n👷 ${profile.name||''}\n📍 ${profile.site||''}\n${'─'.repeat(30)}\n${records.slice(0,10).map(r => `📅 ${formatDatePT(r.date)}: ${r.entry||'?'} → ${r.exit||'?'} (${calcWorked(r)})`).join('\n')}`); window.open(`https://wa.me/${COMPANY_WA}?text=${text}`, '_blank'); vibrate(); }
+function exportCSV() { 
+  if(!records.length) { 
+    showToast('⚠️ Sem dados'); 
+    return; 
+  } 
+  const header = 'Data,Nome,Local,Entrada,Saída Almoço,Retorno Almoço,Saída,Horas Trabalhadas,Observação\n'; 
+  const rows = records.map(r => {
+    const horas = calcWorked(r);
+    return `${r.date},"${r.name || ''}","${r.site || ''}",${r.entry || ''},${r.lunchout || ''},${r.lunchin || ''},${r.exit || ''},${horas},"${r.obs || ''}"`;
+  }).join('\n'); 
+  const blob = new Blob(['\uFEFF' + header + rows], {type:'text/csv;charset=utf-8'}); 
+  const a = document.createElement('a'); 
+  a.href = URL.createObjectURL(blob); 
+  a.download = 'registos-horas.csv'; 
+  a.click(); 
+  showToast('📄 CSV exportado'); 
+}
+
+// ============================================================
+// FUNÇÃO CORRIGIDA: copyReport
+// ============================================================
+function copyReport() { 
+  if(!records.length) { 
+    showToast('⚠️ Sem dados'); 
+    return; 
+  } 
+  const text = records.slice(0,20).map(r => {
+    const horas = calcWorked(r);
+    const almoco = (r.lunchout && r.lunchin) ? ` (Alm: ${r.lunchout}→${r.lunchin})` : '';
+    return `${formatDatePT(r.date)}: ${r.entry || '?'}→${r.exit || '?'}${almoco} = ${horas}${r.obs ? ' - ' + r.obs : ''}`;
+  }).join('\n');
+  const header = `📋 RELATÓRIO PROPÓSITOS INTERLIGADOS\n👷 ${profile.name || ''}\n📍 ${profile.site || ''}\n${'─'.repeat(30)}\n\n`;
+  navigator.clipboard.writeText(header + text); 
+  vibrate(); 
+  showToast('📋 Relatório copiado'); 
+}
+
+// ============================================================
+// FUNÇÃO CORRIGIDA: exportWA
+// ============================================================
+function exportWA() { 
+  if(!records.length) { 
+    showToast('⚠️ Sem dados'); 
+    return; 
+  } 
+  const lines = records.slice(0,10).map(r => {
+    const horas = calcWorked(r);
+    const almoco = (r.lunchout && r.lunchin) ? ` (Alm: ${r.lunchout}→${r.lunchin})` : '';
+    return `📅 ${formatDatePT(r.date)}: ${r.entry || '?'}→${r.exit || '?'}${almoco} = ${horas}`;
+  });
+  const text = encodeURIComponent(
+    `📋 REGISTO DE HORAS - PROPÓSITOS INTERLIGADOS\n` +
+    `👷 ${profile.name || ''}\n` +
+    `📍 ${profile.site || ''}\n` +
+    `${'─'.repeat(30)}\n` +
+    lines.join('\n')
+  ); 
+  window.open(`https://wa.me/${COMPANY_WA}?text=${text}`, '_blank'); 
+  vibrate(); 
+}
+
+// ============================================================
+// FUNÇÃO CORRIGIDA: sendWA
+// ============================================================
 function sendWA() { 
   if(!validateRequiredFields()) return;
   vibrate(); 
   const obs = document.getElementById('obs-input').value.trim(); 
-  let worked = '--:--'; 
-  if(times.entry && times.exit) { 
-    const e = times.entry.split(':').map(Number); 
-    const x = times.exit.split(':').map(Number); 
-    const total = (x[0]*60+x[1]) - (e[0]*60+e[1]); 
-    worked = `${String(Math.floor(total/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`; 
-  } 
-  const text = encodeURIComponent(`📋 PROPÓSITOS INTERLIGADOS\n👷 ${profile.name||'—'} | 📍 ${profile.site||'—'}\n📅 ${formatDatePT(currentDate)}\n🟢 Entrada: ${times.entry||'?'}\n🔴 Saída: ${times.exit||'?'}\n⏱ Total: ${worked}${obs?'\n💬 '+obs:''}`); 
+  
+  let worked = '--:--';
+  let almocoInfo = '';
+  
+  if(times.entry && times.exit) {
+    const e = times.entry.split(':').map(Number);
+    const x = times.exit.split(':').map(Number);
+    let totalMinutos = (x[0]*60 + x[1]) - (e[0]*60 + e[1]);
+    
+    if(times.lunchout && times.lunchin) {
+      const lo = times.lunchout.split(':').map(Number);
+      const li = times.lunchin.split(':').map(Number);
+      const almocoMinutos = (li[0]*60 + li[1]) - (lo[0]*60 + lo[1]);
+      if(almocoMinutos > 0) {
+        totalMinutos = totalMinutos - almocoMinutos;
+        almocoInfo = `\n🍽️ Almoço: ${times.lunchout}→${times.lunchin}`;
+      }
+    }
+    
+    const hours = Math.floor(totalMinutos / 60);
+    const minutes = totalMinutos % 60;
+    worked = `${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}`;
+  }
+  
+  const text = encodeURIComponent(
+    `📋 PROPÓSITOS INTERLIGADOS\n` +
+    `👷 ${profile.name || '—'} | 📍 ${profile.site || '—'}\n` +
+    `📅 ${formatDatePT(currentDate)}\n` +
+    `🟢 Entrada: ${times.entry || '?'}\n` +
+    `🔴 Saída: ${times.exit || '?'}${almocoInfo}\n` +
+    `⏱ Total trabalhado: ${worked}\n` +
+    `─`.repeat(30) +
+    (obs ? `\n💬 Observação: ${obs}` : '')
+  ); 
+  
   window.open(`https://wa.me/${COMPANY_WA}?text=${text}`, '_blank'); 
 }
 
 // ============================================================
-// ALARME AUTOMÁTICO 18h
+// ALARME AUTOMÁTICO
 // ============================================================
 function initAlarmSystem() {
   if(alarmInterval) clearInterval(alarmInterval);
@@ -1307,7 +1416,6 @@ function confirmClear() {
   }
 }
 
-// Pedir permissão de notificação
 if('Notification' in window && Notification.permission === 'default') {
   Notification.requestPermission();
 }
